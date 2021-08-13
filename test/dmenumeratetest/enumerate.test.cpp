@@ -3,16 +3,17 @@
 // Distributed under the Boost Software License, Version 1.0
 // (See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1.0.txt)
 
-#include <hipony/enumerate.hpp>
-
-#include <catch2/catch.hpp>
+#include "enumerate.hpp"
 
 #include <array>
 #include <list>
 #include <string>
 #include <type_traits>
 #include <vector>
+#include "gtest.h"
 
+#define SECTION(x) 
+#define REQUIRE(x) ASSERT_TRUE(x)
 namespace HIPONY_ENUMERATE_NAMESPACE {
 
 namespace {
@@ -56,7 +57,7 @@ struct user_sentinel {
 
 #if HIPONY_ENUMERATE_CPP14_OR_GREATER
 
-TEST_CASE("as_tuple")
+TEST(astuple, astuple)
 {
     SECTION("each")
     {
@@ -84,7 +85,7 @@ TEST_CASE("as_tuple")
 
 #endif // HIPONY_ENUMERATE_CPP14_OR_GREATER
 
-TEST_CASE("as_array")
+TEST(as_array, as_array)
 {
     SECTION("for-range")
     {
@@ -127,7 +128,7 @@ TEST_CASE("as_array")
 #endif
 }
 
-TEST_CASE("iterator_pointer_tag_t")
+TEST(iterator_pointer_tag_t, iterator_pointer_tag_t)
 {
     SECTION("array")
     {
@@ -186,7 +187,7 @@ TEST_CASE("iterator_pointer_tag_t")
 #endif
 }
 
-TEST_CASE("iterator_tag_t")
+TEST(iterator_tag_t, iterator_tag_t)
 {
     SECTION("list")
     {
@@ -260,7 +261,7 @@ TEST_CASE("iterator_tag_t")
 #endif
 }
 
-TEST_CASE("container_tag_t")
+TEST(container_tag_t, container_tag_t)
 {
     SECTION("array")
     {
@@ -706,7 +707,7 @@ TEST_CASE("container_tag_t")
     }
 }
 
-TEST_CASE("container_size_tag_t")
+TEST(container_size_tag_t, container_size_tag_t)
 {
     SECTION("array")
     {
@@ -1368,7 +1369,7 @@ TEST_CASE("container_size_tag_t")
 
 #if HIPONY_ENUMERATE_CPP14_OR_GREATER
 
-TEST_CASE("tuple_tag_t")
+TEST(tuple_tag_t, tuple_tag_t)
 {
     SECTION("prvalue")
     {
@@ -1425,7 +1426,7 @@ TEST_CASE("tuple_tag_t")
 
 #endif // HIPONY_ENUMERATE_CPP14_OR_GREATER
 
-TEST_CASE("pointer_tag_t")
+TEST(pointer_tag_t, pointer_tag_t)
 {
     SECTION("for-range")
     {
@@ -1492,7 +1493,7 @@ TEST_CASE("pointer_tag_t")
 #endif
 }
 
-TEST_CASE("string_tag_t")
+TEST(string_tag_t, string_tag_t)
 {
     SECTION("char")
     {
@@ -1802,7 +1803,7 @@ TEST_CASE("string_tag_t")
     }
 }
 
-TEST_CASE("array_tag_t")
+TEST(array_tag_t, array_tag_t)
 {
     // FIXME: The lifetime of the array prvalue will end after the function call returns
     // SECTION("prvalue")
@@ -1900,7 +1901,7 @@ TEST_CASE("array_tag_t")
 
 #if HIPONY_ENUMERATE_HAS_CONSTEXPR
 
-TEST_CASE("constexpr")
+TEST(constexpr, constexpr)
 {
     struct function_object {
         constexpr auto operator()() const -> int
@@ -1921,7 +1922,7 @@ TEST_CASE("constexpr")
 
 #if HIPONY_ENUMERATE_HAS_AGGREGATES
 
-TEST_CASE("aggregate_tag_t")
+TEST(aggregate_tag_t, aggregate_tag_t)
 {
     struct aggregate_t {
         int         i;

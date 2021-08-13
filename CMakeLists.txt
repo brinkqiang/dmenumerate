@@ -17,9 +17,10 @@ MESSAGE(STATUS "VERSION: ${DMENUMERATE_VERSION}")
 
 OPTION(USE_DMENUMERATE "use dmenumerate" OFF)
 CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/include/dmenumerate_config.h.in ${CMAKE_CURRENT_SOURCE_DIR}/include/dmenumerate_config.h)
-
+ModuleImport("dmtest" "thirdparty/dmtest")
+ModuleImport("dmformat" "thirdparty/dmformat")
 LibImport("dmenumerate_module" "src/dmenumerate_module")
-ExeImport("test" "dmenumerate_module")
+ExeImport("test" "dmenumerate_module;dmtest")
 
 #ADD_CUSTOM_COMMAND(
 #TARGET dmenumeratetest

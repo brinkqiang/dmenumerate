@@ -3,7 +3,7 @@
 // Distributed under the Boost Software License, Version 1.0
 // (See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1.0.txt)
 
-#include <hipony/enumerate.hpp>
+#include <enumerate.hpp>
 
 #include <array>
 #include <list>
@@ -14,6 +14,10 @@
 #include <utility>
 #include <vector>
 
+#include "gtest.h"
+
+#define SECTION(x) 
+#define REQUIRE(x) ASSERT_TRUE(x)
 namespace HIPONY_ENUMERATE_NAMESPACE {
 namespace hipony_enumerate {
 

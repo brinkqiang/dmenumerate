@@ -19,30 +19,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include "dmenumerate_module.h"
-#include "dmformat.h"
+#ifndef __DMENUMERATE_CONFIG_H_INCLUDE__
+#define __DMENUMERATE_CONFIG_H_INCLUDE__
 
-Cdmenumerate_module::Cdmenumerate_module()
-{
+#define DMENUMERATE_VERSION "1.0.1"
+/* #undef USE_DMENUMERATE */
 
-}
-
-Cdmenumerate_module::~Cdmenumerate_module()
-{
-
-}
-
-void DMAPI Cdmenumerate_module::Release(void)
-{
-    delete this;
-}
-
-void DMAPI Cdmenumerate_module::Test(void)
-{
-
-}
-
-Idmenumerate* DMAPI dmenumerateGetModule()
-{
-    return new Cdmenumerate_module();
-}
+#endif // __DMENUMERATE_CONFIG_H_INCLUDE__
