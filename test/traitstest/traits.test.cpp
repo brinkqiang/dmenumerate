@@ -17,7 +17,7 @@
 #include "gtest.h"
 
 #define SECTION(x) 
-#define REQUIRE(x) ASSERT_TRUE(x)
+
 namespace HIPONY_ENUMERATE_NAMESPACE {
 namespace hipony_enumerate {
 
