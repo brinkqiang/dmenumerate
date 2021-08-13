@@ -1,11 +1,3 @@
-//
-// enumerate for C++11 and later.
-// For more information see https://github.com/hipony/enumerate
-//
-// Copyright 2021 Alexandr Timofeev
-//
-// Distributed under the Boost Software License, Version 1.0
-// (See accompanying file LICENSE or copy at http://www.boost.org/LICENSE_1.0.txt)
 
 #ifndef HIPONY_ENUMERATE_HPP_INCLUDED
 #define HIPONY_ENUMERATE_HPP_INCLUDED
