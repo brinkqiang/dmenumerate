@@ -13,7 +13,7 @@
 #include "gtest.h"
 
 #define SECTION(x) 
-#define REQUIRE(x) ASSERT_TRUE(x)
+
 namespace HIPONY_ENUMERATE_NAMESPACE {
 
 namespace {
@@ -65,10 +65,10 @@ TEST(astuple, astuple)
         enumerate(as_tuple, 0, 1., "str").each([&](auto index, auto& value) {
             assert_same<decltype(index), std::size_t>();
 
-            REQUIRE(index == index_of<typename std::decay<decltype(value)>::type>());
+            ASSERT_TRUE(index == index_of<typename std::decay<decltype(value)>::type>());
             ++counter;
         });
-        REQUIRE(counter == 3);
+        ASSERT_TRUE(counter == 3);
     }
     SECTION("each as int")
     {
@@ -76,10 +76,10 @@ TEST(astuple, astuple)
         enumerate_as<int>(as_tuple, 0, 1., "str").each([&](auto index, auto& value) {
             assert_same<decltype(index), int>();
 
-            REQUIRE(index == index_of<typename std::decay<decltype(value)>::type>());
+            ASSERT_TRUE(index == index_of<typename std::decay<decltype(value)>::type>());
             ++counter;
         });
-        REQUIRE(counter == 3);
+        ASSERT_TRUE(counter == 3);
     }
 }
 
@@ -94,10 +94,10 @@ TEST(as_array, as_array)
             assert_same<std::size_t, decltype(item.index)>();
             assert_same<int&, decltype(item.value)>();
 
-            REQUIRE(item.index * 10 == item.value);
+            ASSERT_TRUE(item.index * 10 == item.value);
             ++counter;
         }
-        REQUIRE(counter == 5);
+        ASSERT_TRUE(counter == 5);
     }
     SECTION("for-range as int")
     {
@@ -106,10 +106,10 @@ TEST(as_array, as_array)
             assert_same<int, decltype(item.index)>();
             assert_same<int&, decltype(item.value)>();
 
-            REQUIRE(item.index * 10 == item.value);
+            ASSERT_TRUE(item.index * 10 == item.value);
             ++counter;
         }
-        REQUIRE(counter == 5);
+        ASSERT_TRUE(counter == 5);
     }
 #if HIPONY_ENUMERATE_HAS_RANGES && !defined(__clang__)
     SECTION("ranges")
@@ -120,10 +120,10 @@ TEST(as_array, as_array)
             assert_same<int, decltype(item.index)>();
             assert_same<int&, decltype(item.value)>();
 
-            REQUIRE(item.index * 10 == item.value);
+            ASSERT_TRUE(item.index * 10 == item.value);
             ++counter;
         }
-        REQUIRE(counter == 3);
+        ASSERT_TRUE(counter == 3);
     }
 #endif
 }
@@ -138,10 +138,10 @@ TEST(iterator_pointer_tag_t, iterator_pointer_tag_t)
             assert_same<int&, decltype(item.value)>();
             assert_same<std::size_t, decltype(item.index)>();
 
-            REQUIRE(item.index * 10 == item.value);
+            ASSERT_TRUE(item.index * 10 == item.value);
             ++counter;
         }
-        REQUIRE(counter == 5);
+        ASSERT_TRUE(counter == 5);
     }
     SECTION("const")
     {
@@ -151,10 +151,10 @@ TEST(iterator_pointer_tag_t, iterator_pointer_tag_t)
             assert_same<int const&, decltype(item.value)>();
             assert_same<std::size_t, decltype(item.index)>();
 
-            REQUIRE(item.index * 10 == item.value);
+            ASSERT_TRUE(item.index * 10 == item.value);
             ++counter;
         }
-        REQUIRE(counter == 5);
+        ASSERT_TRUE(counter == 5);
     }
     SECTION("as int")
     {
@@ -164,10 +164,10 @@ TEST(iterator_pointer_tag_t, iterator_pointer_tag_t)
             assert_same<int const&, decltype(item.value)>();
             assert_same<int, decltype(item.index)>();
 
-            REQUIRE(item.index * 10 == item.value);
+            ASSERT_TRUE(item.index * 10 == item.value);
             ++counter;
         }
-        REQUIRE(counter == 5);
+        ASSERT_TRUE(counter == 5);
     }
 #if HIPONY_ENUMERATE_HAS_RANGES && !defined(__clang__)
     SECTION("ranges")
@@ -179,10 +179,10 @@ TEST(iterator_pointer_tag_t, iterator_pointer_tag_t)
             assert_same<int const&, decltype(item.value)>();
             assert_same<int, decltype(item.index)>();
 
-            REQUIRE(item.index * 10 == item.value);
+            ASSERT_TRUE(item.index * 10 == item.value);
             ++counter;
         }
-        REQUIRE(counter == 3);
+        ASSERT_TRUE(counter == 3);
     }
 #endif
 }
@@ -197,10 +197,10 @@ TEST(iterator_tag_t, iterator_tag_t)
             assert_same<int&, decltype(item.value)>();
             assert_same<std::size_t, decltype(item.index)>();
 
-            REQUIRE(item.index * 10 == item.value);
+            ASSERT_TRUE(item.index * 10 == item.value);
             ++counter;
         }
-        REQUIRE(counter == 5);
+        ASSERT_TRUE(counter == 5);
     }
     SECTION("const")
     {
@@ -210,10 +210,10 @@ TEST(iterator_tag_t, iterator_tag_t)
             assert_same<int const&, decltype(item.value)>();
             assert_same<std::size_t, decltype(item.index)>();
 
-            REQUIRE(item.index * 10 == item.value);
+            ASSERT_TRUE(item.index * 10 == item.value);
             ++counter;
         }
-        REQUIRE(counter == 5);
+        ASSERT_TRUE(counter == 5);
     }
     SECTION("as int")
     {
@@ -223,10 +223,10 @@ TEST(iterator_tag_t, iterator_tag_t)
             assert_same<int const&, decltype(item.value)>();
             assert_same<int, decltype(item.index)>();
 
-            REQUIRE(item.index * 10 == item.value);
+            ASSERT_TRUE(item.index * 10 == item.value);
             ++counter;
         }
-        REQUIRE(counter == 5);
+        ASSERT_TRUE(counter == 5);
     }
 #if HIPONY_ENUMERATE_HAS_RANGES && !defined(__clang__)
     SECTION("ranges")
@@ -238,10 +238,10 @@ TEST(iterator_tag_t, iterator_tag_t)
             assert_same<int const&, decltype(item.value)>();
             assert_same<int, decltype(item.index)>();
 
-            REQUIRE(item.index * 10 == item.value);
+            ASSERT_TRUE(item.index * 10 == item.value);
             ++counter;
         }
-        REQUIRE(counter == 3);
+        ASSERT_TRUE(counter == 3);
     }
 #endif
 #if defined(__cpp_range_based_for) && (__cpp_range_based_for >= 201603L)
@@ -253,10 +253,10 @@ TEST(iterator_tag_t, iterator_tag_t)
             assert_same<int const&, decltype(item.value)>();
             assert_same<int, decltype(item.index)>();
 
-            REQUIRE(item.index * 10 == item.value);
+            ASSERT_TRUE(item.index * 10 == item.value);
             ++counter;
         }
-        REQUIRE(counter == 3);
+        ASSERT_TRUE(counter == 3);
     }
 #endif
 }
@@ -271,10 +271,10 @@ TEST(container_tag_t, container_tag_t)
             for (auto&& item : enumerate(std::array<int, 5>({0, 10, 20, 30, 40}))) {
                 assert_same<int&, decltype(item.value)>();
 
-                REQUIRE(item.index * 10 == item.value);
+                ASSERT_TRUE(item.index * 10 == item.value);
                 ++counter;
             }
-            REQUIRE(counter == 5);
+            ASSERT_TRUE(counter == 5);
         }
         SECTION("lvalue")
         {
@@ -284,11 +284,11 @@ TEST(container_tag_t, container_tag_t)
                 assert_same<decltype(array)::size_type, decltype(item.index)>();
                 assert_same<decltype(array)::value_type&, decltype(item.value)>();
 
-                REQUIRE(&array[item.index] == &item.value);
-                REQUIRE(item.index * 10 == item.value);
+                ASSERT_TRUE(&array[item.index] == &item.value);
+                ASSERT_TRUE(item.index * 10 == item.value);
                 ++counter;
             }
-            REQUIRE(counter == 5);
+            ASSERT_TRUE(counter == 5);
         }
         SECTION("const")
         {
@@ -298,11 +298,11 @@ TEST(container_tag_t, container_tag_t)
                 assert_same<decltype(array)::size_type, decltype(item.index)>();
                 assert_same<decltype(array)::value_type const&, decltype(item.value)>();
 
-                REQUIRE(&array[item.index] == &item.value);
-                REQUIRE(item.index * 10 == item.value);
+                ASSERT_TRUE(&array[item.index] == &item.value);
+                ASSERT_TRUE(item.index * 10 == item.value);
                 ++counter;
             }
-            REQUIRE(counter == 5);
+            ASSERT_TRUE(counter == 5);
         }
         SECTION("as int")
         {
@@ -312,11 +312,11 @@ TEST(container_tag_t, container_tag_t)
                 assert_same<int, decltype(item.index)>();
                 assert_same<decltype(array)::value_type const&, decltype(item.value)>();
 
-                REQUIRE(&array[item.index] == &item.value);
-                REQUIRE(item.index * 10 == item.value);
+                ASSERT_TRUE(&array[item.index] == &item.value);
+                ASSERT_TRUE(item.index * 10 == item.value);
                 ++counter;
             }
-            REQUIRE(counter == 5);
+            ASSERT_TRUE(counter == 5);
         }
 #if HIPONY_ENUMERATE_HAS_RANGES && !defined(__clang__)
         SECTION("ranges")
@@ -325,10 +325,10 @@ TEST(container_tag_t, container_tag_t)
             auto const range   = enumerate_as<int>(std::array<int, 5>({0, 10, 20, 30, 40}));
             for (auto&& item : range | std::ranges::views::take(3)) {
                 assert_same<int, decltype(item.index)>();
-                REQUIRE(item.index * 10 == item.value);
+                ASSERT_TRUE(item.index * 10 == item.value);
                 ++counter;
             }
-            REQUIRE(counter == 3);
+            ASSERT_TRUE(counter == 3);
         }
         SECTION("ranges-view")
         {
@@ -338,11 +338,11 @@ TEST(container_tag_t, container_tag_t)
                 assert_same<int, decltype(item.index)>();
                 assert_same<decltype(array)::value_type const&, decltype(item.value)>();
 
-                REQUIRE(&array[item.index] == &item.value);
-                REQUIRE(item.index * 10 == item.value);
+                ASSERT_TRUE(&array[item.index] == &item.value);
+                ASSERT_TRUE(item.index * 10 == item.value);
                 ++counter;
             }
-            REQUIRE(counter == 3);
+            ASSERT_TRUE(counter == 3);
         }
         SECTION("ranges-pipe")
         {
@@ -352,11 +352,11 @@ TEST(container_tag_t, container_tag_t)
                 assert_same<int, decltype(item.index)>();
                 assert_same<decltype(array)::value_type const&, decltype(item.value)>();
 
-                REQUIRE(&array[item.index] == &item.value);
-                REQUIRE(item.index * 10 == item.value);
+                ASSERT_TRUE(&array[item.index] == &item.value);
+                ASSERT_TRUE(item.index * 10 == item.value);
                 ++counter;
             }
-            REQUIRE(counter == 3);
+            ASSERT_TRUE(counter == 3);
         }
         SECTION("ranges-reverse")
         {
@@ -367,11 +367,11 @@ TEST(container_tag_t, container_tag_t)
                 assert_same<decltype(array)::value_type const&, decltype(item.value)>();
 
                 auto const index = array.size() - (item.index + 1);
-                REQUIRE(&array[index] == &item.value);
-                REQUIRE(index * 10 == item.value);
+                ASSERT_TRUE(&array[index] == &item.value);
+                ASSERT_TRUE(index * 10 == item.value);
                 ++counter;
             }
-            REQUIRE(counter == array.size());
+            ASSERT_TRUE(counter == array.size());
         }
 #endif
     }
@@ -383,10 +383,10 @@ TEST(container_tag_t, container_tag_t)
             for (auto&& item : enumerate(std::vector<int>({0, 10, 20, 30, 40}))) {
                 assert_same<int&, decltype(item.value)>();
 
-                REQUIRE(item.index * 10 == item.value);
+                ASSERT_TRUE(item.index * 10 == item.value);
                 ++counter;
             }
-            REQUIRE(counter == 5);
+            ASSERT_TRUE(counter == 5);
         }
         SECTION("lvalue")
         {
@@ -396,11 +396,11 @@ TEST(container_tag_t, container_tag_t)
                 assert_same<decltype(vector)::size_type, decltype(item.index)>();
                 assert_same<decltype(vector)::value_type&, decltype(item.value)>();
 
-                REQUIRE(&vector[item.index] == &item.value);
-                REQUIRE(item.index * 10 == item.value);
+                ASSERT_TRUE(&vector[item.index] == &item.value);
+                ASSERT_TRUE(item.index * 10 == item.value);
                 ++counter;
             }
-            REQUIRE(counter == 5);
+            ASSERT_TRUE(counter == 5);
         }
         SECTION("const")
         {
@@ -410,11 +410,11 @@ TEST(container_tag_t, container_tag_t)
                 assert_same<decltype(vector)::size_type, decltype(item.index)>();
                 assert_same<decltype(vector)::value_type const&, decltype(item.value)>();
 
-                REQUIRE(&vector[item.index] == &item.value);
-                REQUIRE(item.index * 10 == item.value);
+                ASSERT_TRUE(&vector[item.index] == &item.value);
+                ASSERT_TRUE(item.index * 10 == item.value);
                 ++counter;
             }
-            REQUIRE(counter == 5);
+            ASSERT_TRUE(counter == 5);
         }
         SECTION("as int")
         {
@@ -424,11 +424,11 @@ TEST(container_tag_t, container_tag_t)
                 assert_same<int, decltype(item.index)>();
                 assert_same<decltype(vector)::value_type const&, decltype(item.value)>();
 
-                REQUIRE(&vector[item.index] == &item.value);
-                REQUIRE(item.index * 10 == item.value);
+                ASSERT_TRUE(&vector[item.index] == &item.value);
+                ASSERT_TRUE(item.index * 10 == item.value);
                 ++counter;
             }
-            REQUIRE(counter == 5);
+            ASSERT_TRUE(counter == 5);
         }
 #if HIPONY_ENUMERATE_HAS_RANGES && !defined(__clang__)
         SECTION("ranges")
@@ -437,10 +437,10 @@ TEST(container_tag_t, container_tag_t)
             auto const range   = enumerate_as<int>(std::vector<int>({0, 10, 20, 30, 40}));
             for (auto&& item : range | std::ranges::views::take(3)) {
                 assert_same<int, decltype(item.index)>();
-                REQUIRE(item.index * 10 == item.value);
+                ASSERT_TRUE(item.index * 10 == item.value);
                 ++counter;
             }
-            REQUIRE(counter == 3);
+            ASSERT_TRUE(counter == 3);
         }
         SECTION("ranges-view")
         {
@@ -450,11 +450,11 @@ TEST(container_tag_t, container_tag_t)
                 assert_same<int, decltype(item.index)>();
                 assert_same<decltype(vector)::value_type const&, decltype(item.value)>();
 
-                REQUIRE(&vector[item.index] == &item.value);
-                REQUIRE(item.index * 10 == item.value);
+                ASSERT_TRUE(&vector[item.index] == &item.value);
+                ASSERT_TRUE(item.index * 10 == item.value);
                 ++counter;
             }
-            REQUIRE(counter == 3);
+            ASSERT_TRUE(counter == 3);
         }
         SECTION("ranges-pipe")
         {
@@ -464,11 +464,11 @@ TEST(container_tag_t, container_tag_t)
                 assert_same<std::size_t, decltype(item.index)>();
                 assert_same<decltype(vector)::value_type const&, decltype(item.value)>();
 
-                REQUIRE(&vector[item.index] == &item.value);
-                REQUIRE(item.index * 10 == item.value);
+                ASSERT_TRUE(&vector[item.index] == &item.value);
+                ASSERT_TRUE(item.index * 10 == item.value);
                 ++counter;
             }
-            REQUIRE(counter == 3);
+            ASSERT_TRUE(counter == 3);
         }
         SECTION("ranges-reverse")
         {
@@ -479,11 +479,11 @@ TEST(container_tag_t, container_tag_t)
                 assert_same<decltype(vector)::value_type const&, decltype(item.value)>();
 
                 auto const index = vector.size() - (item.index + 1);
-                REQUIRE(&vector[index] == &item.value);
-                REQUIRE(index * 10 == item.value);
+                ASSERT_TRUE(&vector[index] == &item.value);
+                ASSERT_TRUE(index * 10 == item.value);
                 ++counter;
             }
-            REQUIRE(counter == vector.size());
+            ASSERT_TRUE(counter == vector.size());
         }
 #endif
     }
@@ -495,10 +495,10 @@ TEST(container_tag_t, container_tag_t)
             for (auto&& item : enumerate(std::string("01234"))) {
                 assert_same<char&, decltype(item.value)>();
 
-                REQUIRE(item.index + '0' == item.value);
+                ASSERT_TRUE(item.index + '0' == item.value);
                 ++counter;
             }
-            REQUIRE(counter == 5);
+            ASSERT_TRUE(counter == 5);
         }
         SECTION("lvalue")
         {
@@ -508,11 +508,11 @@ TEST(container_tag_t, container_tag_t)
                 assert_same<decltype(string)::size_type, decltype(item.index)>();
                 assert_same<decltype(string)::value_type&, decltype(item.value)>();
 
-                REQUIRE(&string[item.index] == &item.value);
-                REQUIRE(item.index + '0' == item.value);
+                ASSERT_TRUE(&string[item.index] == &item.value);
+                ASSERT_TRUE(item.index + '0' == item.value);
                 ++counter;
             }
-            REQUIRE(counter == 5);
+            ASSERT_TRUE(counter == 5);
         }
         SECTION("const")
         {
@@ -522,11 +522,11 @@ TEST(container_tag_t, container_tag_t)
                 assert_same<decltype(string)::size_type, decltype(item.index)>();
                 assert_same<decltype(string)::value_type const&, decltype(item.value)>();
 
-                REQUIRE(&string[item.index] == &item.value);
-                REQUIRE(item.index + '0' == item.value);
+                ASSERT_TRUE(&string[item.index] == &item.value);
+                ASSERT_TRUE(item.index + '0' == item.value);
                 ++counter;
             }
-            REQUIRE(counter == 5);
+            ASSERT_TRUE(counter == 5);
         }
         SECTION("as int")
         {
@@ -536,11 +536,11 @@ TEST(container_tag_t, container_tag_t)
                 assert_same<int, decltype(item.index)>();
                 assert_same<decltype(string)::value_type const&, decltype(item.value)>();
 
-                REQUIRE(&string[item.index] == &item.value);
-                REQUIRE(item.index + '0' == item.value);
+                ASSERT_TRUE(&string[item.index] == &item.value);
+                ASSERT_TRUE(item.index + '0' == item.value);
                 ++counter;
             }
-            REQUIRE(counter == 5);
+            ASSERT_TRUE(counter == 5);
         }
 #if HIPONY_ENUMERATE_HAS_RANGES && !defined(__clang__)
         SECTION("ranges")
@@ -549,10 +549,10 @@ TEST(container_tag_t, container_tag_t)
             auto const range   = enumerate_as<int>(std::string("01234"));
             for (auto&& item : range | std::ranges::views::take(3)) {
                 assert_same<int, decltype(item.index)>();
-                REQUIRE(item.index + '0' == item.value);
+                ASSERT_TRUE(item.index + '0' == item.value);
                 ++counter;
             }
-            REQUIRE(counter == 3);
+            ASSERT_TRUE(counter == 3);
         }
         SECTION("ranges-views")
         {
@@ -562,11 +562,11 @@ TEST(container_tag_t, container_tag_t)
                 assert_same<int, decltype(item.index)>();
                 assert_same<decltype(string)::value_type const&, decltype(item.value)>();
 
-                REQUIRE(&string[item.index] == &item.value);
-                REQUIRE(item.index + '0' == item.value);
+                ASSERT_TRUE(&string[item.index] == &item.value);
+                ASSERT_TRUE(item.index + '0' == item.value);
                 ++counter;
             }
-            REQUIRE(counter == 3);
+            ASSERT_TRUE(counter == 3);
         }
         SECTION("ranges-pipe")
         {
@@ -576,11 +576,11 @@ TEST(container_tag_t, container_tag_t)
                 assert_same<int, decltype(item.index)>();
                 assert_same<decltype(string)::value_type const&, decltype(item.value)>();
 
-                REQUIRE(&string[item.index] == &item.value);
-                REQUIRE(item.index + '0' == item.value);
+                ASSERT_TRUE(&string[item.index] == &item.value);
+                ASSERT_TRUE(item.index + '0' == item.value);
                 ++counter;
             }
-            REQUIRE(counter == 3);
+            ASSERT_TRUE(counter == 3);
         }
         SECTION("ranges-reverse")
         {
@@ -591,11 +591,11 @@ TEST(container_tag_t, container_tag_t)
                 assert_same<decltype(string)::value_type const&, decltype(item.value)>();
 
                 auto const index = string.size() - (item.index + 1);
-                REQUIRE(&string[index] == &item.value);
-                REQUIRE(index + '0' == item.value);
+                ASSERT_TRUE(&string[index] == &item.value);
+                ASSERT_TRUE(index + '0' == item.value);
                 ++counter;
             }
-            REQUIRE(counter == string.size());
+            ASSERT_TRUE(counter == string.size());
         }
 #endif
     }
@@ -607,10 +607,10 @@ TEST(container_tag_t, container_tag_t)
             for (auto&& item : enumerate(std::list<int>({0, 10, 20, 30, 40}))) {
                 assert_same<int&, decltype(item.value)>();
 
-                REQUIRE(item.index * 10 == item.value);
+                ASSERT_TRUE(item.index * 10 == item.value);
                 ++counter;
             }
-            REQUIRE(counter == 5);
+            ASSERT_TRUE(counter == 5);
         }
         SECTION("lvalue")
         {
@@ -620,10 +620,10 @@ TEST(container_tag_t, container_tag_t)
                 assert_same<decltype(list)::size_type, decltype(item.index)>();
                 assert_same<decltype(list)::value_type&, decltype(item.value)>();
 
-                REQUIRE(item.index * 10 == item.value);
+                ASSERT_TRUE(item.index * 10 == item.value);
                 ++counter;
             }
-            REQUIRE(counter == 5);
+            ASSERT_TRUE(counter == 5);
         }
         SECTION("const")
         {
@@ -633,10 +633,10 @@ TEST(container_tag_t, container_tag_t)
                 assert_same<decltype(list)::size_type, decltype(item.index)>();
                 assert_same<decltype(list)::value_type const&, decltype(item.value)>();
 
-                REQUIRE(item.index * 10 == item.value);
+                ASSERT_TRUE(item.index * 10 == item.value);
                 ++counter;
             }
-            REQUIRE(counter == 5);
+            ASSERT_TRUE(counter == 5);
         }
         SECTION("as int")
         {
@@ -646,10 +646,10 @@ TEST(container_tag_t, container_tag_t)
                 assert_same<int, decltype(item.index)>();
                 assert_same<decltype(list)::value_type const&, decltype(item.value)>();
 
-                REQUIRE(item.index * 10 == item.value);
+                ASSERT_TRUE(item.index * 10 == item.value);
                 ++counter;
             }
-            REQUIRE(counter == 5);
+            ASSERT_TRUE(counter == 5);
         }
 #if HIPONY_ENUMERATE_HAS_RANGES && !defined(__clang__)
         SECTION("ranges")
@@ -658,10 +658,10 @@ TEST(container_tag_t, container_tag_t)
             auto const range   = enumerate_as<int>(std::list<int>({0, 10, 20, 30, 40}));
             for (auto&& item : range | std::ranges::views::take(3)) {
                 assert_same<int, decltype(item.index)>();
-                REQUIRE(item.index * 10 == item.value);
+                ASSERT_TRUE(item.index * 10 == item.value);
                 ++counter;
             }
-            REQUIRE(counter == 3);
+            ASSERT_TRUE(counter == 3);
         }
         SECTION("ranges-view")
         {
@@ -671,10 +671,10 @@ TEST(container_tag_t, container_tag_t)
                 assert_same<int, decltype(item.index)>();
                 assert_same<decltype(list)::value_type const&, decltype(item.value)>();
 
-                REQUIRE(item.index * 10 == item.value);
+                ASSERT_TRUE(item.index * 10 == item.value);
                 ++counter;
             }
-            REQUIRE(counter == 3);
+            ASSERT_TRUE(counter == 3);
         }
         SECTION("ranges-pipe")
         {
@@ -684,10 +684,10 @@ TEST(container_tag_t, container_tag_t)
                 assert_same<int, decltype(item.index)>();
                 assert_same<decltype(list)::value_type const&, decltype(item.value)>();
 
-                REQUIRE(item.index * 10 == item.value);
+                ASSERT_TRUE(item.index * 10 == item.value);
                 ++counter;
             }
-            REQUIRE(counter == 3);
+            ASSERT_TRUE(counter == 3);
         }
         SECTION("ranges-reverse")
         {
@@ -698,10 +698,10 @@ TEST(container_tag_t, container_tag_t)
                 assert_same<decltype(list)::value_type const&, decltype(item.value)>();
 
                 auto const index = list.size() - (item.index + 1);
-                REQUIRE(index * 10 == item.value);
+                ASSERT_TRUE(index * 10 == item.value);
                 ++counter;
             }
-            REQUIRE(counter == list.size());
+            ASSERT_TRUE(counter == list.size());
         }
 #endif
     }
@@ -718,10 +718,10 @@ TEST(container_size_tag_t, container_size_tag_t)
             for (auto&& item : enumerate(std::array<int, 5>({0, 10, 20, 30, 40}), size)) {
                 assert_same<int&, decltype(item.value)>();
 
-                REQUIRE(item.index * 10 == item.value);
+                ASSERT_TRUE(item.index * 10 == item.value);
                 ++counter;
             }
-            REQUIRE(counter == size);
+            ASSERT_TRUE(counter == size);
         }
         SECTION("lvalue")
         {
@@ -732,12 +732,12 @@ TEST(container_size_tag_t, container_size_tag_t)
                 assert_same<decltype(array)::size_type, decltype(item.index)>();
                 assert_same<decltype(array)::value_type&, decltype(item.value)>();
 
-                REQUIRE(&array[item.index] == &item.value);
-                REQUIRE(item.index * 10 == item.value);
+                ASSERT_TRUE(&array[item.index] == &item.value);
+                ASSERT_TRUE(item.index * 10 == item.value);
                 ++counter;
             }
-            REQUIRE(counter == size);
-            REQUIRE(counter != array.size());
+            ASSERT_TRUE(counter == size);
+            ASSERT_TRUE(counter != array.size());
         }
         SECTION("const")
         {
@@ -748,12 +748,12 @@ TEST(container_size_tag_t, container_size_tag_t)
                 assert_same<decltype(array)::size_type, decltype(item.index)>();
                 assert_same<decltype(array)::value_type const&, decltype(item.value)>();
 
-                REQUIRE(&array[item.index] == &item.value);
-                REQUIRE(item.index * 10 == item.value);
+                ASSERT_TRUE(&array[item.index] == &item.value);
+                ASSERT_TRUE(item.index * 10 == item.value);
                 ++counter;
             }
-            REQUIRE(counter == size);
-            REQUIRE(counter != array.size());
+            ASSERT_TRUE(counter == size);
+            ASSERT_TRUE(counter != array.size());
         }
         SECTION("as int")
         {
@@ -764,12 +764,12 @@ TEST(container_size_tag_t, container_size_tag_t)
                 assert_same<int, decltype(item.index)>();
                 assert_same<decltype(array)::value_type const&, decltype(item.value)>();
 
-                REQUIRE(&array[item.index] == &item.value);
-                REQUIRE(item.index * 10 == item.value);
+                ASSERT_TRUE(&array[item.index] == &item.value);
+                ASSERT_TRUE(item.index * 10 == item.value);
                 ++counter;
             }
-            REQUIRE(counter == size);
-            REQUIRE(counter != array.size());
+            ASSERT_TRUE(counter == size);
+            ASSERT_TRUE(counter != array.size());
         }
 #if HIPONY_ENUMERATE_HAS_RANGES && !defined(__clang__)
         SECTION("ranges")
@@ -779,10 +779,10 @@ TEST(container_size_tag_t, container_size_tag_t)
             auto const range   = enumerate_as<int>(std::array<int, 5>({0, 10, 20, 30, 40}), 5);
             for (auto&& item : range | std::ranges::views::take(size)) {
                 assert_same<int, decltype(item.index)>();
-                REQUIRE(item.index * 10 == item.value);
+                ASSERT_TRUE(item.index * 10 == item.value);
                 ++counter;
             }
-            REQUIRE(counter == size);
+            ASSERT_TRUE(counter == size);
         }
         SECTION("ranges-view")
         {
@@ -794,12 +794,12 @@ TEST(container_size_tag_t, container_size_tag_t)
                 assert_same<int, decltype(item.index)>();
                 assert_same<decltype(array)::value_type const&, decltype(item.value)>();
 
-                REQUIRE(&array[item.index] == &item.value);
-                REQUIRE(item.index * 10 == item.value);
+                ASSERT_TRUE(&array[item.index] == &item.value);
+                ASSERT_TRUE(item.index * 10 == item.value);
                 ++counter;
             }
-            REQUIRE(counter == size);
-            REQUIRE(counter != array.size());
+            ASSERT_TRUE(counter == size);
+            ASSERT_TRUE(counter != array.size());
         }
         SECTION("ranges-reverse")
         {
@@ -811,11 +811,11 @@ TEST(container_size_tag_t, container_size_tag_t)
                 assert_same<decltype(array)::value_type const&, decltype(item.value)>();
 
                 auto const index = size - (item.index + 1);
-                REQUIRE(&array[index] == &item.value);
-                REQUIRE(index * 10 == item.value);
+                ASSERT_TRUE(&array[index] == &item.value);
+                ASSERT_TRUE(index * 10 == item.value);
                 ++counter;
             }
-            REQUIRE(counter == size);
+            ASSERT_TRUE(counter == size);
         }
 #endif
         SECTION("more")
@@ -827,12 +827,12 @@ TEST(container_size_tag_t, container_size_tag_t)
                 assert_same<int, decltype(item.index)>();
                 assert_same<decltype(array)::value_type const&, decltype(item.value)>();
 
-                REQUIRE(&array[item.index] == &item.value);
-                REQUIRE(item.index * 10 == item.value);
+                ASSERT_TRUE(&array[item.index] == &item.value);
+                ASSERT_TRUE(item.index * 10 == item.value);
                 ++counter;
             }
-            REQUIRE(counter != size);
-            REQUIRE(counter == array.size());
+            ASSERT_TRUE(counter != size);
+            ASSERT_TRUE(counter == array.size());
         }
         SECTION("exact")
         {
@@ -843,12 +843,12 @@ TEST(container_size_tag_t, container_size_tag_t)
                 assert_same<int, decltype(item.index)>();
                 assert_same<decltype(array)::value_type const&, decltype(item.value)>();
 
-                REQUIRE(&array[item.index] == &item.value);
-                REQUIRE(item.index * 10 == item.value);
+                ASSERT_TRUE(&array[item.index] == &item.value);
+                ASSERT_TRUE(item.index * 10 == item.value);
                 ++counter;
             }
-            REQUIRE(counter == size);
-            REQUIRE(counter == array.size());
+            ASSERT_TRUE(counter == size);
+            ASSERT_TRUE(counter == array.size());
         }
         SECTION("zero")
         {
@@ -859,12 +859,12 @@ TEST(container_size_tag_t, container_size_tag_t)
                 assert_same<int, decltype(item.index)>();
                 assert_same<decltype(array)::value_type const&, decltype(item.value)>();
 
-                REQUIRE(&array[item.index] == &item.value);
-                REQUIRE(item.index * 10 == item.value);
+                ASSERT_TRUE(&array[item.index] == &item.value);
+                ASSERT_TRUE(item.index * 10 == item.value);
                 ++counter;
             }
-            REQUIRE(counter == size);
-            REQUIRE(counter == array.size());
+            ASSERT_TRUE(counter == size);
+            ASSERT_TRUE(counter == array.size());
         }
         SECTION("zero-more")
         {
@@ -875,12 +875,12 @@ TEST(container_size_tag_t, container_size_tag_t)
                 assert_same<int, decltype(item.index)>();
                 assert_same<decltype(array)::value_type const&, decltype(item.value)>();
 
-                REQUIRE(&array[item.index] == &item.value);
-                REQUIRE(item.index * 10 == item.value);
+                ASSERT_TRUE(&array[item.index] == &item.value);
+                ASSERT_TRUE(item.index * 10 == item.value);
                 ++counter;
             }
-            REQUIRE(counter != size);
-            REQUIRE(counter == array.size());
+            ASSERT_TRUE(counter != size);
+            ASSERT_TRUE(counter == array.size());
         }
     }
     SECTION("vector")
@@ -892,10 +892,10 @@ TEST(container_size_tag_t, container_size_tag_t)
             for (auto&& item : enumerate(std::vector<int>({0, 10, 20, 30, 40}), size)) {
                 assert_same<int&, decltype(item.value)>();
 
-                REQUIRE(item.index * 10 == item.value);
+                ASSERT_TRUE(item.index * 10 == item.value);
                 ++counter;
             }
-            REQUIRE(counter == size);
+            ASSERT_TRUE(counter == size);
         }
         SECTION("lvalue")
         {
@@ -906,12 +906,12 @@ TEST(container_size_tag_t, container_size_tag_t)
                 assert_same<decltype(vector)::size_type, decltype(item.index)>();
                 assert_same<decltype(vector)::value_type&, decltype(item.value)>();
 
-                REQUIRE(&vector[item.index] == &item.value);
-                REQUIRE(item.index * 10 == item.value);
+                ASSERT_TRUE(&vector[item.index] == &item.value);
+                ASSERT_TRUE(item.index * 10 == item.value);
                 ++counter;
             }
-            REQUIRE(counter == size);
-            REQUIRE(counter != vector.size());
+            ASSERT_TRUE(counter == size);
+            ASSERT_TRUE(counter != vector.size());
         }
         SECTION("const")
         {
@@ -922,12 +922,12 @@ TEST(container_size_tag_t, container_size_tag_t)
                 assert_same<decltype(vector)::size_type, decltype(item.index)>();
                 assert_same<decltype(vector)::value_type const&, decltype(item.value)>();
 
-                REQUIRE(&vector[item.index] == &item.value);
-                REQUIRE(item.index * 10 == item.value);
+                ASSERT_TRUE(&vector[item.index] == &item.value);
+                ASSERT_TRUE(item.index * 10 == item.value);
                 ++counter;
             }
-            REQUIRE(counter == size);
-            REQUIRE(counter != vector.size());
+            ASSERT_TRUE(counter == size);
+            ASSERT_TRUE(counter != vector.size());
         }
         SECTION("as int")
         {
@@ -938,12 +938,12 @@ TEST(container_size_tag_t, container_size_tag_t)
                 assert_same<int, decltype(item.index)>();
                 assert_same<decltype(vector)::value_type const&, decltype(item.value)>();
 
-                REQUIRE(&vector[item.index] == &item.value);
-                REQUIRE(item.index * 10 == item.value);
+                ASSERT_TRUE(&vector[item.index] == &item.value);
+                ASSERT_TRUE(item.index * 10 == item.value);
                 ++counter;
             }
-            REQUIRE(counter == size);
-            REQUIRE(counter != vector.size());
+            ASSERT_TRUE(counter == size);
+            ASSERT_TRUE(counter != vector.size());
         }
 #if HIPONY_ENUMERATE_HAS_RANGES && !defined(__clang__)
         SECTION("ranges")
@@ -953,10 +953,10 @@ TEST(container_size_tag_t, container_size_tag_t)
             auto const range   = enumerate_as<int>(std::vector<int>({0, 10, 20, 30, 40}), 5);
             for (auto&& item : range | std::ranges::views::take(size)) {
                 assert_same<int, decltype(item.index)>();
-                REQUIRE(item.index * 10 == item.value);
+                ASSERT_TRUE(item.index * 10 == item.value);
                 ++counter;
             }
-            REQUIRE(counter == size);
+            ASSERT_TRUE(counter == size);
         }
         SECTION("ranges-view")
         {
@@ -968,12 +968,12 @@ TEST(container_size_tag_t, container_size_tag_t)
                 assert_same<int, decltype(item.index)>();
                 assert_same<decltype(vector)::value_type const&, decltype(item.value)>();
 
-                REQUIRE(&vector[item.index] == &item.value);
-                REQUIRE(item.index * 10 == item.value);
+                ASSERT_TRUE(&vector[item.index] == &item.value);
+                ASSERT_TRUE(item.index * 10 == item.value);
                 ++counter;
             }
-            REQUIRE(counter == size);
-            REQUIRE(counter != vector.size());
+            ASSERT_TRUE(counter == size);
+            ASSERT_TRUE(counter != vector.size());
         }
         SECTION("ranges-reverse")
         {
@@ -985,11 +985,11 @@ TEST(container_size_tag_t, container_size_tag_t)
                 assert_same<decltype(vector)::value_type const&, decltype(item.value)>();
 
                 auto const index = size - (item.index + 1);
-                REQUIRE(&vector[index] == &item.value);
-                REQUIRE(index * 10 == item.value);
+                ASSERT_TRUE(&vector[index] == &item.value);
+                ASSERT_TRUE(index * 10 == item.value);
                 ++counter;
             }
-            REQUIRE(counter == size);
+            ASSERT_TRUE(counter == size);
         }
 #endif
         SECTION("more")
@@ -1001,12 +1001,12 @@ TEST(container_size_tag_t, container_size_tag_t)
                 assert_same<int, decltype(item.index)>();
                 assert_same<decltype(vector)::value_type const&, decltype(item.value)>();
 
-                REQUIRE(&vector[item.index] == &item.value);
-                REQUIRE(item.index * 10 == item.value);
+                ASSERT_TRUE(&vector[item.index] == &item.value);
+                ASSERT_TRUE(item.index * 10 == item.value);
                 ++counter;
             }
-            REQUIRE(counter != size);
-            REQUIRE(counter == vector.size());
+            ASSERT_TRUE(counter != size);
+            ASSERT_TRUE(counter == vector.size());
         }
         SECTION("exact")
         {
@@ -1017,12 +1017,12 @@ TEST(container_size_tag_t, container_size_tag_t)
                 assert_same<int, decltype(item.index)>();
                 assert_same<decltype(vector)::value_type const&, decltype(item.value)>();
 
-                REQUIRE(&vector[item.index] == &item.value);
-                REQUIRE(item.index * 10 == item.value);
+                ASSERT_TRUE(&vector[item.index] == &item.value);
+                ASSERT_TRUE(item.index * 10 == item.value);
                 ++counter;
             }
-            REQUIRE(counter == size);
-            REQUIRE(counter == vector.size());
+            ASSERT_TRUE(counter == size);
+            ASSERT_TRUE(counter == vector.size());
         }
         SECTION("zero")
         {
@@ -1033,12 +1033,12 @@ TEST(container_size_tag_t, container_size_tag_t)
                 assert_same<int, decltype(item.index)>();
                 assert_same<decltype(vector)::value_type const&, decltype(item.value)>();
 
-                REQUIRE(&vector[item.index] == &item.value);
-                REQUIRE(item.index * 10 == item.value);
+                ASSERT_TRUE(&vector[item.index] == &item.value);
+                ASSERT_TRUE(item.index * 10 == item.value);
                 ++counter;
             }
-            REQUIRE(counter == size);
-            REQUIRE(counter == vector.size());
+            ASSERT_TRUE(counter == size);
+            ASSERT_TRUE(counter == vector.size());
         }
         SECTION("zero-more")
         {
@@ -1049,12 +1049,12 @@ TEST(container_size_tag_t, container_size_tag_t)
                 assert_same<int, decltype(item.index)>();
                 assert_same<decltype(vector)::value_type const&, decltype(item.value)>();
 
-                REQUIRE(&vector[item.index] == &item.value);
-                REQUIRE(item.index * 10 == item.value);
+                ASSERT_TRUE(&vector[item.index] == &item.value);
+                ASSERT_TRUE(item.index * 10 == item.value);
                 ++counter;
             }
-            REQUIRE(counter != size);
-            REQUIRE(counter == vector.size());
+            ASSERT_TRUE(counter != size);
+            ASSERT_TRUE(counter == vector.size());
         }
     }
     SECTION("string")
@@ -1066,10 +1066,10 @@ TEST(container_size_tag_t, container_size_tag_t)
             for (auto&& item : enumerate(std::string("01234"), size)) {
                 assert_same<char&, decltype(item.value)>();
 
-                REQUIRE(item.index + '0' == item.value);
+                ASSERT_TRUE(item.index + '0' == item.value);
                 ++counter;
             }
-            REQUIRE(counter == size);
+            ASSERT_TRUE(counter == size);
         }
         SECTION("lvalue")
         {
@@ -1080,12 +1080,12 @@ TEST(container_size_tag_t, container_size_tag_t)
                 assert_same<decltype(string)::size_type, decltype(item.index)>();
                 assert_same<decltype(string)::value_type&, decltype(item.value)>();
 
-                REQUIRE(&string[item.index] == &item.value);
-                REQUIRE(item.index + '0' == item.value);
+                ASSERT_TRUE(&string[item.index] == &item.value);
+                ASSERT_TRUE(item.index + '0' == item.value);
                 ++counter;
             }
-            REQUIRE(counter == size);
-            REQUIRE(counter != string.size());
+            ASSERT_TRUE(counter == size);
+            ASSERT_TRUE(counter != string.size());
         }
         SECTION("const")
         {
@@ -1096,12 +1096,12 @@ TEST(container_size_tag_t, container_size_tag_t)
                 assert_same<decltype(string)::size_type, decltype(item.index)>();
                 assert_same<decltype(string)::value_type const&, decltype(item.value)>();
 
-                REQUIRE(&string[item.index] == &item.value);
-                REQUIRE(item.index + '0' == item.value);
+                ASSERT_TRUE(&string[item.index] == &item.value);
+                ASSERT_TRUE(item.index + '0' == item.value);
                 ++counter;
             }
-            REQUIRE(counter == size);
-            REQUIRE(counter != string.size());
+            ASSERT_TRUE(counter == size);
+            ASSERT_TRUE(counter != string.size());
         }
         SECTION("as int")
         {
@@ -1112,12 +1112,12 @@ TEST(container_size_tag_t, container_size_tag_t)
                 assert_same<int, decltype(item.index)>();
                 assert_same<decltype(string)::value_type const&, decltype(item.value)>();
 
-                REQUIRE(&string[item.index] == &item.value);
-                REQUIRE(item.index + '0' == item.value);
+                ASSERT_TRUE(&string[item.index] == &item.value);
+                ASSERT_TRUE(item.index + '0' == item.value);
                 ++counter;
             }
-            REQUIRE(counter == size);
-            REQUIRE(counter != string.size());
+            ASSERT_TRUE(counter == size);
+            ASSERT_TRUE(counter != string.size());
         }
 #if HIPONY_ENUMERATE_HAS_RANGES && !defined(__clang__)
         SECTION("ranges")
@@ -1127,10 +1127,10 @@ TEST(container_size_tag_t, container_size_tag_t)
             auto const range   = enumerate_as<int>(std::string("01234"), 5);
             for (auto&& item : range | std::ranges::views::take(size)) {
                 assert_same<int, decltype(item.index)>();
-                REQUIRE(item.index + '0' == item.value);
+                ASSERT_TRUE(item.index + '0' == item.value);
                 ++counter;
             }
-            REQUIRE(counter == size);
+            ASSERT_TRUE(counter == size);
         }
         SECTION("ranges-view")
         {
@@ -1142,12 +1142,12 @@ TEST(container_size_tag_t, container_size_tag_t)
                 assert_same<int, decltype(item.index)>();
                 assert_same<decltype(string)::value_type const&, decltype(item.value)>();
 
-                REQUIRE(&string[item.index] == &item.value);
-                REQUIRE(item.index + '0' == item.value);
+                ASSERT_TRUE(&string[item.index] == &item.value);
+                ASSERT_TRUE(item.index + '0' == item.value);
                 ++counter;
             }
-            REQUIRE(counter == size);
-            REQUIRE(counter != string.size());
+            ASSERT_TRUE(counter == size);
+            ASSERT_TRUE(counter != string.size());
         }
 #endif
         SECTION("more")
@@ -1159,12 +1159,12 @@ TEST(container_size_tag_t, container_size_tag_t)
                 assert_same<int, decltype(item.index)>();
                 assert_same<decltype(string)::value_type const&, decltype(item.value)>();
 
-                REQUIRE(&string[item.index] == &item.value);
-                REQUIRE(item.index + '0' == item.value);
+                ASSERT_TRUE(&string[item.index] == &item.value);
+                ASSERT_TRUE(item.index + '0' == item.value);
                 ++counter;
             }
-            REQUIRE(counter != size);
-            REQUIRE(counter == string.size());
+            ASSERT_TRUE(counter != size);
+            ASSERT_TRUE(counter == string.size());
         }
         SECTION("exact")
         {
@@ -1175,12 +1175,12 @@ TEST(container_size_tag_t, container_size_tag_t)
                 assert_same<int, decltype(item.index)>();
                 assert_same<decltype(string)::value_type const&, decltype(item.value)>();
 
-                REQUIRE(&string[item.index] == &item.value);
-                REQUIRE(item.index + '0' == item.value);
+                ASSERT_TRUE(&string[item.index] == &item.value);
+                ASSERT_TRUE(item.index + '0' == item.value);
                 ++counter;
             }
-            REQUIRE(counter == size);
-            REQUIRE(counter == string.size());
+            ASSERT_TRUE(counter == size);
+            ASSERT_TRUE(counter == string.size());
         }
         SECTION("zero")
         {
@@ -1191,12 +1191,12 @@ TEST(container_size_tag_t, container_size_tag_t)
                 assert_same<int, decltype(item.index)>();
                 assert_same<decltype(string)::value_type const&, decltype(item.value)>();
 
-                REQUIRE(&string[item.index] == &item.value);
-                REQUIRE(item.index + '0' == item.value);
+                ASSERT_TRUE(&string[item.index] == &item.value);
+                ASSERT_TRUE(item.index + '0' == item.value);
                 ++counter;
             }
-            REQUIRE(counter == size);
-            REQUIRE(counter == string.size());
+            ASSERT_TRUE(counter == size);
+            ASSERT_TRUE(counter == string.size());
         }
         SECTION("zero-more")
         {
@@ -1207,12 +1207,12 @@ TEST(container_size_tag_t, container_size_tag_t)
                 assert_same<int, decltype(item.index)>();
                 assert_same<decltype(string)::value_type const&, decltype(item.value)>();
 
-                REQUIRE(&string[item.index] == &item.value);
-                REQUIRE(item.index + '0' == item.value);
+                ASSERT_TRUE(&string[item.index] == &item.value);
+                ASSERT_TRUE(item.index + '0' == item.value);
                 ++counter;
             }
-            REQUIRE(counter != size);
-            REQUIRE(counter == string.size());
+            ASSERT_TRUE(counter != size);
+            ASSERT_TRUE(counter == string.size());
         }
     }
     SECTION("list")
@@ -1224,10 +1224,10 @@ TEST(container_size_tag_t, container_size_tag_t)
             for (auto&& item : enumerate(std::list<int>({0, 10, 20, 30, 40}), size)) {
                 assert_same<int&, decltype(item.value)>();
 
-                REQUIRE(item.index * 10 == item.value);
+                ASSERT_TRUE(item.index * 10 == item.value);
                 ++counter;
             }
-            REQUIRE(counter == size);
+            ASSERT_TRUE(counter == size);
         }
         SECTION("lvalue")
         {
@@ -1238,11 +1238,11 @@ TEST(container_size_tag_t, container_size_tag_t)
                 assert_same<decltype(list)::size_type, decltype(item.index)>();
                 assert_same<decltype(list)::value_type&, decltype(item.value)>();
 
-                REQUIRE(item.index * 10 == item.value);
+                ASSERT_TRUE(item.index * 10 == item.value);
                 ++counter;
             }
-            REQUIRE(counter == size);
-            REQUIRE(counter != list.size());
+            ASSERT_TRUE(counter == size);
+            ASSERT_TRUE(counter != list.size());
         }
         SECTION("const")
         {
@@ -1253,11 +1253,11 @@ TEST(container_size_tag_t, container_size_tag_t)
                 assert_same<decltype(list)::size_type, decltype(item.index)>();
                 assert_same<decltype(list)::value_type const&, decltype(item.value)>();
 
-                REQUIRE(item.index * 10 == item.value);
+                ASSERT_TRUE(item.index * 10 == item.value);
                 ++counter;
             }
-            REQUIRE(counter == size);
-            REQUIRE(counter != list.size());
+            ASSERT_TRUE(counter == size);
+            ASSERT_TRUE(counter != list.size());
         }
         SECTION("as int")
         {
@@ -1268,11 +1268,11 @@ TEST(container_size_tag_t, container_size_tag_t)
                 assert_same<int, decltype(item.index)>();
                 assert_same<decltype(list)::value_type const&, decltype(item.value)>();
 
-                REQUIRE(item.index * 10 == item.value);
+                ASSERT_TRUE(item.index * 10 == item.value);
                 ++counter;
             }
-            REQUIRE(counter == size);
-            REQUIRE(counter != list.size());
+            ASSERT_TRUE(counter == size);
+            ASSERT_TRUE(counter != list.size());
         }
 #if HIPONY_ENUMERATE_HAS_RANGES && !defined(__clang__)
         SECTION("ranges")
@@ -1282,10 +1282,10 @@ TEST(container_size_tag_t, container_size_tag_t)
             auto const range   = enumerate_as<int>(std::list<int>({0, 10, 20, 30, 40}), 5);
             for (auto&& item : range | std::ranges::views::take(size)) {
                 assert_same<int, decltype(item.index)>();
-                REQUIRE(item.index * 10 == item.value);
+                ASSERT_TRUE(item.index * 10 == item.value);
                 ++counter;
             }
-            REQUIRE(counter == size);
+            ASSERT_TRUE(counter == size);
         }
         SECTION("ranges-view")
         {
@@ -1297,11 +1297,11 @@ TEST(container_size_tag_t, container_size_tag_t)
                 assert_same<int, decltype(item.index)>();
                 assert_same<decltype(list)::value_type const&, decltype(item.value)>();
 
-                REQUIRE(item.index * 10 == item.value);
+                ASSERT_TRUE(item.index * 10 == item.value);
                 ++counter;
             }
-            REQUIRE(counter == size);
-            REQUIRE(counter != list.size());
+            ASSERT_TRUE(counter == size);
+            ASSERT_TRUE(counter != list.size());
         }
 #endif
         SECTION("more")
@@ -1313,11 +1313,11 @@ TEST(container_size_tag_t, container_size_tag_t)
                 assert_same<int, decltype(item.index)>();
                 assert_same<decltype(list)::value_type const&, decltype(item.value)>();
 
-                REQUIRE(item.index * 10 == item.value);
+                ASSERT_TRUE(item.index * 10 == item.value);
                 ++counter;
             }
-            REQUIRE(counter != size);
-            REQUIRE(counter == list.size());
+            ASSERT_TRUE(counter != size);
+            ASSERT_TRUE(counter == list.size());
         }
         SECTION("exact")
         {
@@ -1328,11 +1328,11 @@ TEST(container_size_tag_t, container_size_tag_t)
                 assert_same<int, decltype(item.index)>();
                 assert_same<decltype(list)::value_type const&, decltype(item.value)>();
 
-                REQUIRE(item.index * 10 == item.value);
+                ASSERT_TRUE(item.index * 10 == item.value);
                 ++counter;
             }
-            REQUIRE(counter == size);
-            REQUIRE(counter == list.size());
+            ASSERT_TRUE(counter == size);
+            ASSERT_TRUE(counter == list.size());
         }
         SECTION("zero")
         {
@@ -1343,11 +1343,11 @@ TEST(container_size_tag_t, container_size_tag_t)
                 assert_same<int, decltype(item.index)>();
                 assert_same<decltype(list)::value_type const&, decltype(item.value)>();
 
-                REQUIRE(item.index * 10 == item.value);
+                ASSERT_TRUE(item.index * 10 == item.value);
                 ++counter;
             }
-            REQUIRE(counter == size);
-            REQUIRE(counter == list.size());
+            ASSERT_TRUE(counter == size);
+            ASSERT_TRUE(counter == list.size());
         }
         SECTION("zero-more")
         {
@@ -1358,11 +1358,11 @@ TEST(container_size_tag_t, container_size_tag_t)
                 assert_same<int, decltype(item.index)>();
                 assert_same<decltype(list)::value_type const&, decltype(item.value)>();
 
-                REQUIRE(item.index * 10 == item.value);
+                ASSERT_TRUE(item.index * 10 == item.value);
                 ++counter;
             }
-            REQUIRE(counter != size);
-            REQUIRE(counter == list.size());
+            ASSERT_TRUE(counter != size);
+            ASSERT_TRUE(counter == list.size());
         }
     }
 }
@@ -1375,10 +1375,10 @@ TEST(tuple_tag_t, tuple_tag_t)
     {
         auto counter = 0;
         enumerate(std::make_tuple(0, 1., "str")).each([&](auto index, auto& value) {
-            REQUIRE(index == index_of<typename std::decay<decltype(value)>::type>());
+            ASSERT_TRUE(index == index_of<typename std::decay<decltype(value)>::type>());
             ++counter;
         });
-        REQUIRE(counter == 3);
+        ASSERT_TRUE(counter == 3);
     }
     SECTION("lvalue")
     {
@@ -1387,10 +1387,10 @@ TEST(tuple_tag_t, tuple_tag_t)
         enumerate(tuple).each([&](auto index, auto& value) {
             assert_same<decltype(index), std::size_t>();
 
-            REQUIRE(index == index_of<typename std::decay<decltype(value)>::type>());
+            ASSERT_TRUE(index == index_of<typename std::decay<decltype(value)>::type>());
             ++counter;
         });
-        REQUIRE(counter == 3);
+        ASSERT_TRUE(counter == 3);
     }
     SECTION("const")
     {
@@ -1402,10 +1402,10 @@ TEST(tuple_tag_t, tuple_tag_t)
                 std::is_const<typename std::remove_reference<decltype(value)>::type>::value,
                 "Const propagation is broken");
 
-            REQUIRE(index == index_of<typename std::decay<decltype(value)>::type>());
+            ASSERT_TRUE(index == index_of<typename std::decay<decltype(value)>::type>());
             ++counter;
         });
-        REQUIRE(counter == 3);
+        ASSERT_TRUE(counter == 3);
     }
     SECTION("as int")
     {
@@ -1417,10 +1417,10 @@ TEST(tuple_tag_t, tuple_tag_t)
                 std::is_const<typename std::remove_reference<decltype(value)>::type>::value,
                 "Const propagation is broken");
 
-            REQUIRE(index == index_of<typename std::decay<decltype(value)>::type>());
+            ASSERT_TRUE(index == index_of<typename std::decay<decltype(value)>::type>());
             ++counter;
         });
-        REQUIRE(counter == 3);
+        ASSERT_TRUE(counter == 3);
     }
 }
 
@@ -1437,11 +1437,11 @@ TEST(pointer_tag_t, pointer_tag_t)
             assert_same<std::size_t, decltype(item.index)>();
             assert_same<int&, decltype(item.value)>();
 
-            REQUIRE(&ptr[item.index] == &item.value);
-            REQUIRE(item.index * 10 == item.value);
+            ASSERT_TRUE(&ptr[item.index] == &item.value);
+            ASSERT_TRUE(item.index * 10 == item.value);
             ++counter;
         }
-        REQUIRE(counter == 5);
+        ASSERT_TRUE(counter == 5);
     }
     SECTION("const")
     {
@@ -1452,11 +1452,11 @@ TEST(pointer_tag_t, pointer_tag_t)
             assert_same<std::size_t, decltype(item.index)>();
             assert_same<int const&, decltype(item.value)>();
 
-            REQUIRE(&ptr[item.index] == &item.value);
-            REQUIRE(item.index * 10 == item.value);
+            ASSERT_TRUE(&ptr[item.index] == &item.value);
+            ASSERT_TRUE(item.index * 10 == item.value);
             ++counter;
         }
-        REQUIRE(counter == 5);
+        ASSERT_TRUE(counter == 5);
     }
     SECTION("as int")
     {
@@ -1467,11 +1467,11 @@ TEST(pointer_tag_t, pointer_tag_t)
             assert_same<int, decltype(item.index)>();
             assert_same<int const&, decltype(item.value)>();
 
-            REQUIRE(&ptr[item.index] == &item.value);
-            REQUIRE(item.index * 10 == item.value);
+            ASSERT_TRUE(&ptr[item.index] == &item.value);
+            ASSERT_TRUE(item.index * 10 == item.value);
             ++counter;
         }
-        REQUIRE(counter == 5);
+        ASSERT_TRUE(counter == 5);
     }
 #if HIPONY_ENUMERATE_HAS_RANGES && !defined(__clang__)
     SECTION("ranges")
@@ -1484,11 +1484,11 @@ TEST(pointer_tag_t, pointer_tag_t)
             assert_same<int, decltype(item.index)>();
             assert_same<int const&, decltype(item.value)>();
 
-            REQUIRE(&ptr[item.index] == &item.value);
-            REQUIRE(item.index * 10 == item.value);
+            ASSERT_TRUE(&ptr[item.index] == &item.value);
+            ASSERT_TRUE(item.index * 10 == item.value);
             ++counter;
         }
-        REQUIRE(counter == 3);
+        ASSERT_TRUE(counter == 3);
     }
 #endif
 }
@@ -1504,10 +1504,10 @@ TEST(string_tag_t, string_tag_t)
                 assert_same<std::size_t, decltype(item.index)>();
                 assert_same<char const&, decltype(item.value)>();
 
-                REQUIRE(item.index + '0' == item.value);
+                ASSERT_TRUE(item.index + '0' == item.value);
                 ++counter;
             }
-            REQUIRE(counter == 5);
+            ASSERT_TRUE(counter == 5);
         }
         SECTION("lvalue")
         {
@@ -1517,11 +1517,11 @@ TEST(string_tag_t, string_tag_t)
                 assert_same<std::size_t, decltype(item.index)>();
                 assert_same<char const&, decltype(item.value)>();
 
-                REQUIRE(&string[item.index] == &item.value); // NOLINT
-                REQUIRE(item.index + '0' == item.value);
+                ASSERT_TRUE(&string[item.index] == &item.value); // NOLINT
+                ASSERT_TRUE(item.index + '0' == item.value);
                 ++counter;
             }
-            REQUIRE(counter == 5);
+            ASSERT_TRUE(counter == 5);
         }
         SECTION("as int")
         {
@@ -1531,11 +1531,11 @@ TEST(string_tag_t, string_tag_t)
                 assert_same<int, decltype(item.index)>();
                 assert_same<char const&, decltype(item.value)>();
 
-                REQUIRE(&string[item.index] == &item.value); // NOLINT
-                REQUIRE(item.index + '0' == item.value);
+                ASSERT_TRUE(&string[item.index] == &item.value); // NOLINT
+                ASSERT_TRUE(item.index + '0' == item.value);
                 ++counter;
             }
-            REQUIRE(counter == 5);
+            ASSERT_TRUE(counter == 5);
         }
 #if HIPONY_ENUMERATE_HAS_RANGES && !defined(__clang__)
         SECTION("ranges")
@@ -1547,11 +1547,11 @@ TEST(string_tag_t, string_tag_t)
                 assert_same<int, decltype(item.index)>();
                 assert_same<char const&, decltype(item.value)>();
 
-                REQUIRE(&string[item.index] == &item.value); // NOLINT
-                REQUIRE(item.index + '0' == item.value);
+                ASSERT_TRUE(&string[item.index] == &item.value); // NOLINT
+                ASSERT_TRUE(item.index + '0' == item.value);
                 ++counter;
             }
-            REQUIRE(counter == 3);
+            ASSERT_TRUE(counter == 3);
         }
 #endif
     }
@@ -1564,10 +1564,10 @@ TEST(string_tag_t, string_tag_t)
                 assert_same<std::size_t, decltype(item.index)>();
                 assert_same<wchar_t const&, decltype(item.value)>();
 
-                REQUIRE(item.index + '0' == item.value);
+                ASSERT_TRUE(item.index + '0' == item.value);
                 ++counter;
             }
-            REQUIRE(counter == 5);
+            ASSERT_TRUE(counter == 5);
         }
         SECTION("lvalue")
         {
@@ -1577,11 +1577,11 @@ TEST(string_tag_t, string_tag_t)
                 assert_same<std::size_t, decltype(item.index)>();
                 assert_same<wchar_t const&, decltype(item.value)>();
 
-                REQUIRE(&string[item.index] == &item.value); // NOLINT
-                REQUIRE(item.index + '0' == item.value);
+                ASSERT_TRUE(&string[item.index] == &item.value); // NOLINT
+                ASSERT_TRUE(item.index + '0' == item.value);
                 ++counter;
             }
-            REQUIRE(counter == 5);
+            ASSERT_TRUE(counter == 5);
         }
         SECTION("as int")
         {
@@ -1591,11 +1591,11 @@ TEST(string_tag_t, string_tag_t)
                 assert_same<int, decltype(item.index)>();
                 assert_same<wchar_t const&, decltype(item.value)>();
 
-                REQUIRE(&string[item.index] == &item.value); // NOLINT
-                REQUIRE(item.index + '0' == item.value);
+                ASSERT_TRUE(&string[item.index] == &item.value); // NOLINT
+                ASSERT_TRUE(item.index + '0' == item.value);
                 ++counter;
             }
-            REQUIRE(counter == 5);
+            ASSERT_TRUE(counter == 5);
         }
 #if HIPONY_ENUMERATE_HAS_RANGES && !defined(__clang__)
         SECTION("ranges")
@@ -1607,11 +1607,11 @@ TEST(string_tag_t, string_tag_t)
                 assert_same<int, decltype(item.index)>();
                 assert_same<wchar_t const&, decltype(item.value)>();
 
-                REQUIRE(&string[item.index] == &item.value); // NOLINT
-                REQUIRE(item.index + '0' == item.value);
+                ASSERT_TRUE(&string[item.index] == &item.value); // NOLINT
+                ASSERT_TRUE(item.index + '0' == item.value);
                 ++counter;
             }
-            REQUIRE(counter == 3);
+            ASSERT_TRUE(counter == 3);
         }
 #endif
     }
@@ -1626,10 +1626,10 @@ TEST(string_tag_t, string_tag_t)
                 assert_same<std::size_t, decltype(item.index)>();
                 assert_same<char8_t const&, decltype(item.value)>();
 
-                REQUIRE(item.index + '0' == item.value);
+                ASSERT_TRUE(item.index + '0' == item.value);
                 ++counter;
             }
-            REQUIRE(counter == 5);
+            ASSERT_TRUE(counter == 5);
         }
         SECTION("lvalue")
         {
@@ -1639,11 +1639,11 @@ TEST(string_tag_t, string_tag_t)
                 assert_same<std::size_t, decltype(item.index)>();
                 assert_same<char8_t const&, decltype(item.value)>();
 
-                REQUIRE(&string[item.index] == &item.value); // NOLINT
-                REQUIRE(item.index + '0' == item.value);
+                ASSERT_TRUE(&string[item.index] == &item.value); // NOLINT
+                ASSERT_TRUE(item.index + '0' == item.value);
                 ++counter;
             }
-            REQUIRE(counter == 5);
+            ASSERT_TRUE(counter == 5);
         }
         SECTION("as int")
         {
@@ -1653,11 +1653,11 @@ TEST(string_tag_t, string_tag_t)
                 assert_same<int, decltype(item.index)>();
                 assert_same<char8_t const&, decltype(item.value)>();
 
-                REQUIRE(&string[item.index] == &item.value); // NOLINT
-                REQUIRE(item.index + '0' == item.value);
+                ASSERT_TRUE(&string[item.index] == &item.value); // NOLINT
+                ASSERT_TRUE(item.index + '0' == item.value);
                 ++counter;
             }
-            REQUIRE(counter == 5);
+            ASSERT_TRUE(counter == 5);
         }
 #if HIPONY_ENUMERATE_HAS_RANGES && !defined(__clang__)
         SECTION("ranges")
@@ -1669,11 +1669,11 @@ TEST(string_tag_t, string_tag_t)
                 assert_same<int, decltype(item.index)>();
                 assert_same<char8_t const&, decltype(item.value)>();
 
-                REQUIRE(&string[item.index] == &item.value); // NOLINT
-                REQUIRE(item.index + '0' == item.value);
+                ASSERT_TRUE(&string[item.index] == &item.value); // NOLINT
+                ASSERT_TRUE(item.index + '0' == item.value);
                 ++counter;
             }
-            REQUIRE(counter == 3);
+            ASSERT_TRUE(counter == 3);
         }
 #endif
     }
@@ -1689,10 +1689,10 @@ TEST(string_tag_t, string_tag_t)
                 assert_same<char16_t const&, decltype(item.value)>();
 
                 // FIXME: Deduced as an array_tag_t, not string_tag_t
-                REQUIRE(item.index + '0' == item.value);
+                ASSERT_TRUE(item.index + '0' == item.value);
                 ++counter;
             }
-            REQUIRE(counter == 5);
+            ASSERT_TRUE(counter == 5);
         }
         SECTION("lvalue")
         {
@@ -1702,11 +1702,11 @@ TEST(string_tag_t, string_tag_t)
                 assert_same<std::size_t, decltype(item.index)>();
                 assert_same<char16_t const&, decltype(item.value)>();
 
-                REQUIRE(&string[item.index] == &item.value); // NOLINT
-                REQUIRE(item.index + '0' == item.value);
+                ASSERT_TRUE(&string[item.index] == &item.value); // NOLINT
+                ASSERT_TRUE(item.index + '0' == item.value);
                 ++counter;
             }
-            REQUIRE(counter == 5);
+            ASSERT_TRUE(counter == 5);
         }
         SECTION("as int")
         {
@@ -1716,11 +1716,11 @@ TEST(string_tag_t, string_tag_t)
                 assert_same<int, decltype(item.index)>();
                 assert_same<char16_t const&, decltype(item.value)>();
 
-                REQUIRE(&string[item.index] == &item.value); // NOLINT
-                REQUIRE(item.index + '0' == item.value);
+                ASSERT_TRUE(&string[item.index] == &item.value); // NOLINT
+                ASSERT_TRUE(item.index + '0' == item.value);
                 ++counter;
             }
-            REQUIRE(counter == 5);
+            ASSERT_TRUE(counter == 5);
         }
 #if HIPONY_ENUMERATE_HAS_RANGES && !defined(__clang__)
         SECTION("ranges")
@@ -1732,11 +1732,11 @@ TEST(string_tag_t, string_tag_t)
                 assert_same<int, decltype(item.index)>();
                 assert_same<char16_t const&, decltype(item.value)>();
 
-                REQUIRE(&string[item.index] == &item.value); // NOLINT
-                REQUIRE(item.index + '0' == item.value);
+                ASSERT_TRUE(&string[item.index] == &item.value); // NOLINT
+                ASSERT_TRUE(item.index + '0' == item.value);
                 ++counter;
             }
-            REQUIRE(counter == 3);
+            ASSERT_TRUE(counter == 3);
         }
 #endif
     }
@@ -1750,10 +1750,10 @@ TEST(string_tag_t, string_tag_t)
                 assert_same<std::size_t, decltype(item.index)>();
                 assert_same<char32_t const&, decltype(item.value)>();
 
-                REQUIRE(item.index + '0' == item.value);
+                ASSERT_TRUE(item.index + '0' == item.value);
                 ++counter;
             }
-            REQUIRE(counter == 5);
+            ASSERT_TRUE(counter == 5);
         }
         SECTION("lvalue")
         {
@@ -1763,11 +1763,11 @@ TEST(string_tag_t, string_tag_t)
                 assert_same<std::size_t, decltype(item.index)>();
                 assert_same<char32_t const&, decltype(item.value)>();
 
-                REQUIRE(&string[item.index] == &item.value); // NOLINT
-                REQUIRE(item.index + '0' == item.value);
+                ASSERT_TRUE(&string[item.index] == &item.value); // NOLINT
+                ASSERT_TRUE(item.index + '0' == item.value);
                 ++counter;
             }
-            REQUIRE(counter == 5);
+            ASSERT_TRUE(counter == 5);
         }
         SECTION("as int")
         {
@@ -1777,11 +1777,11 @@ TEST(string_tag_t, string_tag_t)
                 assert_same<int, decltype(item.index)>();
                 assert_same<char32_t const&, decltype(item.value)>();
 
-                REQUIRE(&string[item.index] == &item.value); // NOLINT
-                REQUIRE(item.index + '0' == item.value);
+                ASSERT_TRUE(&string[item.index] == &item.value); // NOLINT
+                ASSERT_TRUE(item.index + '0' == item.value);
                 ++counter;
             }
-            REQUIRE(counter == 5);
+            ASSERT_TRUE(counter == 5);
         }
 #if HIPONY_ENUMERATE_HAS_RANGES && !defined(__clang__)
         SECTION("ranges")
@@ -1793,11 +1793,11 @@ TEST(string_tag_t, string_tag_t)
                 assert_same<int, decltype(item.index)>();
                 assert_same<char32_t const&, decltype(item.value)>();
 
-                REQUIRE(&string[item.index] == &item.value); // NOLINT
-                REQUIRE(item.index + '0' == item.value);
+                ASSERT_TRUE(&string[item.index] == &item.value); // NOLINT
+                ASSERT_TRUE(item.index + '0' == item.value);
                 ++counter;
             }
-            REQUIRE(counter == 3);
+            ASSERT_TRUE(counter == 3);
         }
 #endif
     }
@@ -1827,12 +1827,12 @@ TEST(array_tag_t, array_tag_t)
             assert_same<std::size_t, decltype(item.index)>();
             assert_same<int&, decltype(item.value)>();
 
-            REQUIRE(&container[item.index] == &item.value);
-            REQUIRE(item.index * 10 == item.value);
+            ASSERT_TRUE(&container[item.index] == &item.value);
+            ASSERT_TRUE(item.index * 10 == item.value);
 
             ++counter;
         }
-        REQUIRE(counter == 5);
+        ASSERT_TRUE(counter == 5);
     }
     SECTION("const")
     {
@@ -1842,12 +1842,12 @@ TEST(array_tag_t, array_tag_t)
             assert_same<std::size_t, decltype(item.index)>();
             assert_same<int const&, decltype(item.value)>();
 
-            REQUIRE(&container[item.index] == &item.value);
-            REQUIRE(item.index * 10 == item.value);
+            ASSERT_TRUE(&container[item.index] == &item.value);
+            ASSERT_TRUE(item.index * 10 == item.value);
 
             ++counter;
         }
-        REQUIRE(counter == 5);
+        ASSERT_TRUE(counter == 5);
     }
     SECTION("as int")
     {
@@ -1857,12 +1857,12 @@ TEST(array_tag_t, array_tag_t)
             assert_same<int, decltype(item.index)>();
             assert_same<int const&, decltype(item.value)>();
 
-            REQUIRE(&container[item.index] == &item.value);
-            REQUIRE(item.index * 10 == item.value);
+            ASSERT_TRUE(&container[item.index] == &item.value);
+            ASSERT_TRUE(item.index * 10 == item.value);
 
             ++counter;
         }
-        REQUIRE(counter == 5);
+        ASSERT_TRUE(counter == 5);
     }
 #if HIPONY_ENUMERATE_HAS_RANGES && !defined(__clang__)
     SECTION("ranges")
@@ -1874,12 +1874,12 @@ TEST(array_tag_t, array_tag_t)
             assert_same<int, decltype(item.index)>();
             assert_same<int const&, decltype(item.value)>();
 
-            REQUIRE(&container[item.index] == &item.value);
-            REQUIRE(item.index * 10 == item.value);
+            ASSERT_TRUE(&container[item.index] == &item.value);
+            ASSERT_TRUE(item.index * 10 == item.value);
 
             ++counter;
         }
-        REQUIRE(counter == 3);
+        ASSERT_TRUE(counter == 3);
     }
     SECTION("ranges-pipe")
     {
@@ -1889,12 +1889,12 @@ TEST(array_tag_t, array_tag_t)
             assert_same<int, decltype(item.index)>();
             assert_same<int const&, decltype(item.value)>();
 
-            REQUIRE(&container[item.index] == &item.value);
-            REQUIRE(item.index * 10 == item.value);
+            ASSERT_TRUE(&container[item.index] == &item.value);
+            ASSERT_TRUE(item.index * 10 == item.value);
 
             ++counter;
         }
-        REQUIRE(counter == 3);
+        ASSERT_TRUE(counter == 3);
     }
 #endif
 }
@@ -1915,7 +1915,7 @@ TEST(constexpr, constexpr)
         }
     };
     constexpr auto const value = function_object{}();
-    REQUIRE(value == 30);
+    ASSERT_TRUE(value == 30);
 }
 
 #endif
@@ -1933,10 +1933,10 @@ TEST(aggregate_tag_t, aggregate_tag_t)
     {
         auto counter = 0;
         enumerate(aggregate_t{0, 1., "str"}).each([&](auto index, auto& value) {
-            REQUIRE(index == index_of<typename std::decay<decltype(value)>::type>());
+            ASSERT_TRUE(index == index_of<typename std::decay<decltype(value)>::type>());
             ++counter;
         });
-        REQUIRE(counter == 3);
+        ASSERT_TRUE(counter == 3);
     }
     SECTION("lvalue")
     {
@@ -1945,10 +1945,10 @@ TEST(aggregate_tag_t, aggregate_tag_t)
         enumerate(aggregate).each([&](auto index, auto& value) {
             assert_same<decltype(index), std::size_t>();
 
-            REQUIRE(index == index_of<typename std::decay<decltype(value)>::type>());
+            ASSERT_TRUE(index == index_of<typename std::decay<decltype(value)>::type>());
             ++counter;
         });
-        REQUIRE(counter == 3);
+        ASSERT_TRUE(counter == 3);
     }
     SECTION("const")
     {
@@ -1960,10 +1960,10 @@ TEST(aggregate_tag_t, aggregate_tag_t)
                 std::is_const<typename std::remove_reference<decltype(value)>::type>::value,
                 "Const propagation is broken");
 
-            REQUIRE(index == index_of<typename std::decay<decltype(value)>::type>());
+            ASSERT_TRUE(index == index_of<typename std::decay<decltype(value)>::type>());
             ++counter;
         });
-        REQUIRE(counter == 3);
+        ASSERT_TRUE(counter == 3);
     }
     SECTION("as int")
     {
@@ -1975,10 +1975,10 @@ TEST(aggregate_tag_t, aggregate_tag_t)
                 std::is_const<typename std::remove_reference<decltype(value)>::type>::value,
                 "Const propagation is broken");
 
-            REQUIRE(index == index_of<typename std::decay<decltype(value)>::type>());
+            ASSERT_TRUE(index == index_of<typename std::decay<decltype(value)>::type>());
             ++counter;
         });
-        REQUIRE(counter == 3);
+        ASSERT_TRUE(counter == 3);
     }
 }
 
