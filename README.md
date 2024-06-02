@@ -26,6 +26,5 @@ dmenumerate
 ```cpp
 ```
 ## Contacts
-[![Join the chat](https://badges.gitter.im/brinkqiang/dmenumerate/Lobby.svg)](https://gitter.im/brinkqiang/dmenumerate)
 
 ## Thanks
